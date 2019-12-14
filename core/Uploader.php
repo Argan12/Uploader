@@ -2,6 +2,11 @@
 
 namespace App\Core;
 
+require_once('Hash.php');
+require_once ('../../libs/Logs.php');
+
+use App\Libs\Logs;
+
 /**
  * Class Uploader
  * @package App\Core
@@ -91,26 +96,32 @@ class Uploader
     {
         $sourceProperties = getimagesize($_SERVER['DOCUMENT_ROOT'].$path.$newFileName.'.'.$this->getFileExtension($file));
         $imageType = $sourceProperties[2];
-        switch ($imageType)
-        {
-            case IMAGETYPE_PNG:
-                $imageResourceId = imagecreatefrompng($_SERVER['DOCUMENT_ROOT'].$path.$newFileName.'.'.$this->getFileExtension($file));
-                $targetLayer = $this->imageResize($imageResourceId, $sourceProperties[0], $sourceProperties[1]);
-                imagepng($targetLayer, $_SERVER['DOCUMENT_ROOT'].$path.basename($newFileName.'.'.$this->getFileExtension($file)));
-                break;
-            case IMAGETYPE_GIF:
-                $imageResourceId = imagecreatefromgif($_SERVER['DOCUMENT_ROOT'].$path.$newFileName.'.'.$this->getFileExtension($file));
-                $targetLayer = $this->imageResize($imageResourceId, $sourceProperties[0], $sourceProperties[1]);
-                imagegif($targetLayer, $_SERVER['DOCUMENT_ROOT'].$path.basename($newFileName.'.'.$this->getFileExtension($file)));
-                break;
-            case IMAGETYPE_JPEG:
-                $imageResourceId = imagecreatefromjpeg($_SERVER['DOCUMENT_ROOT'].$path.$newFileName.'.'.$this->getFileExtension($file));
-                $targetLayer = $this->imageResize($imageResourceId, $sourceProperties[0], $sourceProperties[1], $targetWidth, $targetHeight);
-                imagejpeg($targetLayer, $_SERVER['DOCUMENT_ROOT'].$path.basename($newFileName.'.'.$this->getFileExtension($file)));
-                break;
-            default:
-                return self::FILE_RESIZE_ERROR;
-                break;
+
+        try {
+            switch ($imageType)
+            {
+                case IMAGETYPE_PNG:
+                    $imageResourceId = imagecreatefrompng($_SERVER['DOCUMENT_ROOT'].$path.$newFileName.'.'.$this->getFileExtension($file));
+                    $targetLayer = $this->imageResize($imageResourceId, $sourceProperties[0], $sourceProperties[1], $targetWidth, $targetHeight);
+                    imagepng($targetLayer, $_SERVER['DOCUMENT_ROOT'].$path.basename($newFileName.'.'.$this->getFileExtension($file)));
+                    break;
+                case IMAGETYPE_GIF:
+                    $imageResourceId = imagecreatefromgif($_SERVER['DOCUMENT_ROOT'].$path.$newFileName.'.'.$this->getFileExtension($file));
+                    $targetLayer = $this->imageResize($imageResourceId, $sourceProperties[0], $sourceProperties[1], $targetWidth, $targetHeight);
+                    imagegif($targetLayer, $_SERVER['DOCUMENT_ROOT'].$path.basename($newFileName.'.'.$this->getFileExtension($file)));
+                    break;
+                case IMAGETYPE_JPEG:
+                    $imageResourceId = imagecreatefromjpeg($_SERVER['DOCUMENT_ROOT'].$path.$newFileName.'.'.$this->getFileExtension($file));
+                    $targetLayer = $this->imageResize($imageResourceId, $sourceProperties[0], $sourceProperties[1], $targetWidth, $targetHeight);
+                    imagejpeg($targetLayer, $_SERVER['DOCUMENT_ROOT'].$path.basename($newFileName.'.'.$this->getFileExtension($file)));
+                    break;
+                default:
+                    return self::FILE_RESIZE_ERROR;
+                    break;
+            }
+        } catch (\Exception $e) {
+            $logs = new Logs();
+            $logs->write('An error occurred during upload file.', $e);
         }
     }
 
