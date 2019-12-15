@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * This class is part of Uploader package.
+ * This class make a hash which will be used for rename a file.
+ * It can be reused for other projects (for example, generate a token).
+ *
+ * Author : Argan Piquet
+ */
+
 namespace Gwereve\Core;
 
 /**

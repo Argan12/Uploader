@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * This class is part of Uploader package.
+ * This class is used to write a log in a text file when an error occurred.
+ * It can be reused for other projects.
+ *
+ * Author : Argan Piquet
+ */
+
 namespace Gwereve\Libs;
 
 require_once($_SERVER['DOCUMENT_ROOT'].'/uploader/vendor/autoload.php');

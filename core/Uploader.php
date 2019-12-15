@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This class is part of the Uploader package.
+ * This is the main class of this package.
+ * It permits to upload your file in directory of your choice with dimensions of your choice.
+ * Uploaded file will be renamed by the current datetime and a hash, for prevents duplicated.
+ *
+ * author : Argan Piquet
+ */
+
 namespace Gwereve\Core;
 
 require_once($_SERVER['DOCUMENT_ROOT'].'/uploader/vendor/autoload.php');
