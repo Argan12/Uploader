@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Libs;
+namespace Gwereve\Libs;
+
+require_once($_SERVER['DOCUMENT_ROOT'].'/uploader/vendor/autoload.php');
 
 /**
  * Class Logs
@@ -14,7 +16,7 @@ class Logs
      */
     public function path()
     {
-        $path = '/uploader/logs/';
+        $path = $_SERVER['DOCUMENT_ROOT'].'/uploader/logs/';
         return $path;
     }
 
@@ -27,7 +29,7 @@ class Logs
     {
         $path = $this->path();
         $filename = $path.$file.'.txt';
-        $logfile = fopen($filename, 'w');
+        $logfile = fopen($filename, 'a+');
         return $logfile;
     }
 

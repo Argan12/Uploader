@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Tests;
+namespace Gwereve\Tests;
 
-require_once('../../core/Uploader.php');
-require_once('../../libs/Logs.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/uploader/vendor/autoload.php');
 
-use App\Core\Uploader;
-use App\Libs\Logs;
+use Gwereve\Core\Uploader;
+use Gwereve\Libs\Logs;
 
 class Model
 {

@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Core;
+namespace Gwereve\Core;
 
-require_once('Hash.php');
-require_once ('../../libs/Logs.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/uploader/vendor/autoload.php');
 
-use App\Libs\Logs;
+use Gwereve\Libs\Logs;
 
 /**
  * Class Uploader
