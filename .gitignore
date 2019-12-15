@@ -1,4 +1,3 @@
-#uploader package
-
 /.idea/
 /tests/
+/vendor/
