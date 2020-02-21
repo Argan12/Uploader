@@ -11,8 +11,6 @@
 
 namespace Gwereve\Core;
 
-require_once($_SERVER['DOCUMENT_ROOT'].'/uploader/vendor/autoload.php');
-
 use Gwereve\Libs\Logs;
 
 /**

@@ -10,8 +10,6 @@
 
 namespace Gwereve\Libs;
 
-require_once($_SERVER['DOCUMENT_ROOT'].'/uploader/vendor/autoload.php');
-
 /**
  * Class Logs
  * @package App\Libs
